@@ -24,15 +24,6 @@ class TagsDeleteView(generic.DeleteView):
 
 
 class TagsUpdateView(generic.UpdateView):
-    # tag1 = Tag.objects.create(name="Coding")
-    # tag1.save()
-    # tag2 = Tag.objects.create(name="Workout")
-    # tag2.save()
-    # a = Task.objects.create(content="Buy 3 carrots and 1 pineapple", is_done=False)
-    # a.save()
-    # a.tags.add(tag1)
-    # a.tags.add(tag2)
-    # a.save()
     model = Tag
     fields = "__all__"
     template_name = "to_do_list/tag_update_form.html"
@@ -47,14 +38,14 @@ class TagsCreateView(generic.CreateView):
 
 class TaskDeleteView(generic.DeleteView):
     model = Task
-    success_url = reverse_lazy("to_do_list:tags-list")
+    success_url = reverse_lazy("to_do_list:index")
 
 
 class TaskUpdateView(generic.UpdateView):
     model = Task
     fields = "__all__"
     template_name = "to_do_list/task_update.html"
-    success_url = reverse_lazy("to_do_list:tags-list")
+    success_url = reverse_lazy("to_do_list:index")
 
 class TaskCreateView(generic.CreateView):
     model = Task
