@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-
+from templates.to_do_list.forms import TaskForm
 from to_do_list.models import Tag, Task
 
 
@@ -50,8 +50,8 @@ class TaskUpdateView(generic.UpdateView):
 class TaskCreateView(generic.CreateView):
     model = Task
     fields = "__all__"
-    success_url = reverse_lazy("to_do_list:index")
     template_name = "to_do_list/task_create.html"
+    success_url = reverse_lazy("to_do_list:index")
 
 def task_status_update(request, pk, operation):
 
