@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>TODO list</h1>
+{% for task in task_list %}
+    <ul>
+        <span style="font-size: 30px; font-weight: 600">{{ task.content }}{% if task.is_done == 0 %} <span style="color:red">Not Done</span>{% else %}<span style="color: green"> Done</span> {% endif %}{% if task.is_done == 0%}<button type="button" class="btn btn-success" style="margin-left: 600px"> <a style="color: white; " href="{% url 'to_do_list:status-update' pk=task.id operation="Complete" %}">Complete</a></button>{% else %}<a style="color: red" href="{% url 'to_do_list:status-update' pk=task.id operation="Undo" %}">Undo</a>{% endif %}<br>
+        <span style="font-size: 20px; font-weight: 400">Created: {{ task.datetime }}<br></span>
+        <span style="font-size: 20px; font-weight: 100; color:##696969;">Tags: {% for tag in task.tags.all %}{{ tag }} {% empty %} No Tags {% endfor %}</span><span style="font-size: 20px"><a href="{% url "to_do_list:task-update" pk=task.id %} ">Update</a> <a href="{% url "to_do_list:task-delete" pk=task.id %} ">Delete</a></span>
+    </ul>
+{% endfor %}
+{% endblock %}
