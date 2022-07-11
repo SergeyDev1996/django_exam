@@ -56,12 +56,18 @@ class TaskUpdateView(generic.UpdateView):
     template_name = "to_do_list/task_update.html"
     success_url = reverse_lazy("to_do_list:tags-list")
 
+class TaskCreateView(generic.CreateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("to_do_list:index")
+    template_name = "to_do_list/task_create.html"
 
 def task_status_update(request, pk, operation):
 
     task = Task.objects.get(id=pk)
     if operation == "Complete":
-        task.content = "SDELANO"
+        task.is_done = 1
     elif operation == "Undo":
         task.is_done = 0
+    task.save()
     return HttpResponseRedirect(reverse_lazy("to_do_list:index"))
